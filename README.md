@@ -274,13 +274,22 @@ az containerapp up --name [container-app-name] --source . --resource-group [reso
 
 You can find more info [here](https://learn.microsoft.com/en-us/azure/container-apps/containerapp-up)
 
-### Deploy to GCP
+### Deploy to Google Cloud
 
-You can deploy to GCP Cloud Run using the following command:
+You can deploy to Cloud Run on Google Cloud using the following command:
 
 ```
-gcloud run deploy [your-service-name] --source . --port 8001 --allow-unauthenticated --region us-central1 --set-env-vars=OPENAI_API_KEY=your_key
+gcloud run deploy [your-service-name] \
+  --source . \
+  --port 8001 \
+  --allow-unauthenticated \
+  --region us-central1 \
+  --set-env-vars=OPENAI_API_KEY=your_key \
+  --labels workload=langchain-app
 ```
+
+This command builds the app and creates a public HTTPS endpoint for it. Because Cloud Run scales to zero instances when 
+there are no requests, you're not charged if the endpoint doesn't receive traffic. [Refer to this overview of Cloud Run to learn more.](https://cloud.google.com/run/docs/overview/what-is-cloud-run)
 
 ### Community Contributed
 
